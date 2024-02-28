@@ -2,7 +2,7 @@ import { app, BrowserWindow, Tray, Menu, session, nativeImage } from 'electron'
 export const globalPath = app.getAppPath()
 import { ElectronBlocker } from '@cliqz/adblocker-electron'
 import path from 'node:path'
-const appIcon = path.join(__dirname, '../build/icon.ico')
+const appIcon = path.join(globalPath, './assets/icon.ico')
 import fetch from 'node-fetch'
 
 let win: BrowserWindow
@@ -15,6 +15,17 @@ const createWindow: () => void = () => {
     })
     win.loadURL('http://localhost:1488')
     win.focus()
+}
+
+function smoothOpening(delay: number): void {
+    if (!win.isVisible()) {
+        win.minimize()
+        setTimeout(() => {
+            win.show()
+        }, delay)
+    } else {
+        win.focus()
+    }
 }
 
 app.whenReady().then(() => {
@@ -32,25 +43,23 @@ app.whenReady().then(() => {
             type: 'normal',
             // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             click: () => {
-                win.show()
-                win.focus()
-                return undefined
+                smoothOpening(150)
             }
         },
         { label: 'Close', type: 'normal', role: 'quit' }
     ])
     tray.setContextMenu(contextMenu)
     tray.addListener('double-click', () => {
-        win.show()
-        win.focus()
+        smoothOpening(150)
     })
+    tray.eventNames
     tray.setToolTip('Anilagann')
 
     //* app to tray event
     win.on('minimize', () => {
         setTimeout(() => {
             win.hide()
-        }, 100)
+        }, 200)
     })
 
     app.on('activate', () => {

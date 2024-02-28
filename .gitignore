@@ -2,3 +2,10 @@ node_modules
 dist
 out
 *.log*
+.prettierrc.yaml
+.prettierignore
+.eslintrc.json
+.eslintrc.cjs
+.eslintignore
+.editorconfig
+.vscode
