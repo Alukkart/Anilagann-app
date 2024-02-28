@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Anilagann</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link type="text/css" href="/stylesheets/style.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/images/icon.webp" type="image/x-icon">
+  <script async src="/javascripts/search.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+  </style> 
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="Nav">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+          <img src="/images/logo.webp" class="d-block rato ratio16x9" alt="Anilagann" width="152px">
+      </a>
+      <div class="d-none d-sm-block">
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+          <li class="nav-item">
+            <a class="nav-link" href="/top" id="link">Топ-100</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/animelist" id="link">Все аниме</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search" id="link">Поиск</a>
+          </li>
+          
+        </ul>
+          <a class="btn btn-primary btn-p" href="/account/profile" role="button">Профиль</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 80px;">
+    <h1 class="text-center">Поиск</h1>
+    <form class="d-flex mb-2" onsubmit="return false" role="search">
+      <input class="form-control shadow-none" autocomplete="off" type="search" id="search" autofocus placeholder="Поиск аниме"/>
+    </form>
+    <ul id="results"></ul>
+  </div>
+</body>
+
+</html>

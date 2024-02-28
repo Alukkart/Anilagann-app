@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Anilagann</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link type="text/css" href="/stylesheets/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/icon.webp" type="image/x-icon">
+    <script async src="/javascripts/mainLoad.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+    </style>  
+    <!-- /Fonts -->
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="Nav">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logo.webp" class="d-block rato ratio16x9" alt="Anilagann" width="152px">
+        </a>
+        <div class="d-none d-sm-block">
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+            <li class="nav-item">
+              <a class="nav-link" href="/top" id="link">Топ-100</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/animelist" id="link">Все аниме</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search" id="link">Поиск</a>
+            </li>
+            
+          </ul>
+
+          <a class="btn btn-primary btn-p" href="/account/profile" role="button">Профиль</a>
+
+        </div>
+      </div>
+    </nav>
+
+  <div class="text-center mt-5">
+    <p>
+      <a class="btn btn-primary mt-5 btn-p" data-bs-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Фильтры
+      </a>
+    </p>
+    <div class="collapse" id="filters">
+      <div class="card-body">
+        <div class="row justify-content-center m-0">
+          <div id="Genres" class="col-lg-2 col-md-3 col-4">
+            <p aria-expanded="false" aria-controls="collapseExample">
+              Жанр
+            </p>
+            <div>
+              <select class="form-select" id="genres">
+                <option value="" selected>Любой</option>
+                <option value="Экшен">Экшен</option>
+                <option value="Комедия">Комедия</option>
+                <option value="Фэнтези">Фэнтези</option>
+                <option value="Приключения">Приключения</option>
+                <option value="Драма">Драма</option>
+                <option value="Сёнен">Сёнен</option>
+                <option value="Романтика">Романтика</option>
+                <option value="Школа">Школа</option>
+                <option value="Фантастика">Фантастика</option>
+                <option value="Сверхъестественное">Сверхъестественное</option>
+                <option value="Детектив">Детектив</option>
+                <option value="Этти">Этти</option>
+                <option value="Исторический">Исторический</option>
+                <option value="Повседневность">Повседневность</option>
+                <option value="Меха">Меха</option>
+                <option value="Гарем">Гарем</option>
+                <option value="Психологическое">Психологическое</option>
+                <option value="Военное">Военное</option>
+                <option value="Ужасы">Ужасы</option>
+                <option value="Спорт">Спорт</option>
+                <option value="Боевые искусства">Боевые искусства</option>
+                <option value="Триллер">Триллер</option>
+                <option value="Музыка">Музыка</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="Status" class="col-lg-2 col-md-3 col-4">
+            <p aria-expanded="false" aria-controls="collapseExample">
+              Статус
+            </p>
+            <div>
+              <select class="form-select" id="status">
+                <option value="" selected>Любой</option>
+                <option value="released">Released</option>
+                <option value="ongoing">Ongoing</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="Types" class="col-lg-2 col-md-3 col-4">
+            <p aria-expanded="false" aria-controls="collapseExample">
+              Тип
+            </p>
+            <div>
+              <select class="form-select" id="types">
+                <option value="" selected>Любой</option>
+                <option value="tv">TV</option>
+                <option value="ova">OVA</option>
+                <option value="movie">Фильм</option>
+                <option value="ona">ONA</option>
+                <option value="special">Спешл</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-3 col-md-3 col-4">
+            <p aria-expanded="false" aria-controls="collapseExample">
+              Год
+            </p>
+            <div id="Years">
+              <div class="slider-styled" id="slider-round"></div>
+            </div>
+          </div> -->
+          
+          <div id="Sort" class="col-lg-2 col-md-3 col-4">
+            <p aria-expanded="false" aria-controls="collapseExample">
+              Сортировать
+            </p>
+            <div>
+              <select class="form-select" id="sort">
+                <option value="date" selected>По обновлениям</option>
+                <option value="rating">По рейтингу</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="justify-content-center align-items-center text-center my-3" id="startload"><a onclick="filterApply();" class="btn btn-p btn-primary">Поиск</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" id="cards"></div>
+  </body>
+</html>
