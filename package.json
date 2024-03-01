@@ -4,7 +4,7 @@
   "description": "anilagann-app",
   "main": "./out/app.js",
   "author": "AGRIG",
-  "homepage": "https://github.com/AGRIG05/anilagann-app",
+  "homepage": "https://github.com/AGRIG05/Anilagann-app",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

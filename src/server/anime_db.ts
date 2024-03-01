@@ -11,8 +11,14 @@ var ratingDBdata
 export var toplist
 export var mainlist
 try {
-    DBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json'), { encoding: 'utf8', flag: 'r' }))
-    minDBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/min.db.json'), { encoding: 'utf8', flag: 'r' }))
+    fs.mkdirSync(path.join(globalPath, '/data').replace('app.asar', 'app.asar.unpacked'), { recursive: true })
+} catch {
+    /* empty */
+}
+
+try {
+    DBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked'), { encoding: 'utf8', flag: 'r' }))
+    minDBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked'), { encoding: 'utf8', flag: 'r' }))
     ratingDBdata = bubbleSort(DBdata)
     toplist = mainList(
         ratingDBdata.map((a: any) => ({ ...a })),
@@ -169,12 +175,12 @@ saveDB('https://db-worker-32o4.onrender.com/').then((data) => {
         )
     }
     progressBarUpdate(9, 8)
-    fs.writeFile(path.join(path.join(globalPath, '/data/db.json')), JSON.stringify(DBdata), (err) => {
+    fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(DBdata), (err) => {
         if (err) {
             console.log(err)
         }
     })
-    fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json')), JSON.stringify(minDBdata), (err) => {
+    fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(minDBdata), (err) => {
         if (err) {
             console.log(err)
         }
@@ -215,12 +221,12 @@ setInterval(() => {
             )
         }
         progressBarUpdate(9, 8)
-        fs.writeFile(path.join(path.join(globalPath, '/data/db.json')), JSON.stringify(DBdata), (err) => {
+        fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(DBdata), (err) => {
             if (err) {
                 console.log(err)
             }
         })
-        fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json')), JSON.stringify(minDBdata), (err) => {
+        fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(minDBdata), (err) => {
             if (err) {
                 console.log(err)
             }

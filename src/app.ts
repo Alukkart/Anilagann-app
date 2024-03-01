@@ -6,14 +6,6 @@ import path from 'node:path'
 const appIcon = path.join(globalPath, './assets/icon.ico')
 import fetch from 'node-fetch'
 
-// if дата нема лоад урл с бомбами
-
-// try{
-//     JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json'), { encoding: 'utf8', flag: 'r' }))
-// }catch{
-
-// }
-
 let win: BrowserWindow
 const createWindow: () => void = () => {
     win = new BrowserWindow({
