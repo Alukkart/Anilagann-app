@@ -9,3 +9,6 @@ out
 .eslintignore
 .editorconfig
 .vscode
+data/db.json
+*.db
+data/min.db.json

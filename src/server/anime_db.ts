@@ -5,25 +5,31 @@ import { progressBarUpdate, globalPath } from '../app'
 import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'node:path'
-let DBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json'), { encoding: 'utf8', flag: 'r' }))
-let minDBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/min.db.json'), { encoding: 'utf8', flag: 'r' }))
-let ratingDBdata = bubbleSort(DBdata)
-
-export let toplist = mainList(
-    ratingDBdata.map((a: any) => ({ ...a })),
-    20
-)
-
-export let mainlist = mainList(
-    DBdata.map((a: any) => ({ ...a })),
-    32
-)
+var DBdata
+var minDBdata
+var ratingDBdata
+export var toplist
+export var mainlist
+try {
+    DBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json'), { encoding: 'utf8', flag: 'r' }))
+    minDBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/min.db.json'), { encoding: 'utf8', flag: 'r' }))
+    ratingDBdata = bubbleSort(DBdata)
+    toplist = mainList(
+        ratingDBdata.map((a: any) => ({ ...a })),
+        20
+    )
+    mainlist = mainList(
+        DBdata.map((a: any) => ({ ...a })),
+        32
+    )
+    if (Filter({ status: 'anons' }).length != 0) {
+        anonses = Filter({ status: 'anons' })
+    }
+} catch {}
 
 export let quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/Quotes.json'), { encoding: 'utf8', flag: 'r' }))
 export var anonses = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), { encoding: 'utf8', flag: 'r' }))
-if (Filter({ status: 'anons' }).length != 0) {
-    anonses = Filter({ status: 'anons' })
-}
+
 
 export function getAnimeInfo(id: string): any {
     return DBdata.find((res: any) => res['ids'].find((data) => data == id) == id)
@@ -31,7 +37,6 @@ export function getAnimeInfo(id: string): any {
 
 function mainList(arr, BS): any {
     let finalData = []
-    // let JSONdata = arr
     for (let i = 0; i < arr.length; i++) {
         if ((i + BS) % BS == 0) {
             finalData[Math.floor(i / BS)] = []

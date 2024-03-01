@@ -3,3 +3,4 @@ semi: false
 printWidth: 170
 trailingComma: none
 tabWidth: 4
+endOfLine: auto

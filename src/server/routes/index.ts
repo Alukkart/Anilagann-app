@@ -9,15 +9,20 @@ function randomInteger(min: number, max: number): number {
 
 /* GET home page. */
 router.get('/', async function (_req, res) {
-    const quote = quotes[randomInteger(0, quotes.length - 1)]
-    res.setHeader('Content-Type', 'text/html')
-    res.render('index', {
-        data: mainlist[0],
-        anime: quote.anime,
-        quote: quote.quote,
-        character: quote.character,
-        anonses: anonses
-    })
+    if (mainlist) {
+        const quote = quotes[randomInteger(0, quotes.length - 1)]
+        res.setHeader('Content-Type', 'text/html')
+        res.render('index', {
+            data: mainlist[0],
+            anime: quote.anime,
+            quote: quote.quote,
+            character: quote.character,
+            anonses: anonses
+        })
+    } else {
+        res.status(406)
+        res.render('minesweeper', {})
+    }
 })
 
 export default router
