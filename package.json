@@ -20,6 +20,7 @@
     "build:linux": "npm run build && electron-builder --linux --config"
   },
   "build": {
+    "productName": "Anilagann",
     "directories": {
       "buildResources": "build"
     },
