@@ -9,7 +9,21 @@ function randomInteger(min: number, max: number): number {
 
 /* GET home page. */
 router.get('/', async function (_req, res) {
-    if (mainlist) {
+    // if (mainlist) {
+    //     const quote = quotes[randomInteger(0, quotes.length - 1)]
+    //     res.setHeader('Content-Type', 'text/html')
+    //     res.render('index', {
+    //         data: mainlist[0],
+    //         anime: quote.anime,
+    //         quote: quote.quote,
+    //         character: quote.character,
+    //         anonses: anonses
+    //     })
+    // } else {
+    //     res.status(406)
+    //     res.render('minesweeper', {})
+    // }
+    try {
         const quote = quotes[randomInteger(0, quotes.length - 1)]
         res.setHeader('Content-Type', 'text/html')
         res.render('index', {
@@ -19,7 +33,7 @@ router.get('/', async function (_req, res) {
             character: quote.character,
             anonses: anonses
         })
-    } else {
+    } catch (error) {
         res.status(406)
         res.render('minesweeper', {})
     }

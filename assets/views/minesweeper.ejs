@@ -440,7 +440,7 @@
 
         async function getMinList() {
             let res = await fetch('/')
-            if(res.status != 406){return false}else{return true}
+            if(res.status == 406){return false}else{return true}
         }
 
         var f = true
@@ -456,7 +456,7 @@
                     }
                 })
             }
-        }, 1500);
+        }, 5000);
         
     </script>
 </body>
