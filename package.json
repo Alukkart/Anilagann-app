@@ -1,6 +1,6 @@
 {
-  "name": "anilagann-app",
-  "version": "1.0.0",
+  "name": "anilagann",
+  "version": "1.0.1",
   "description": "anilagann-app",
   "main": "./out/app.js",
   "author": "AGRIG",
@@ -21,18 +21,19 @@
   },
   "build": {
     "directories": {
-        "buildResources": "build"
+      "buildResources": "build"
     },
     "nsis": {
-        "installerIcon": "build/icon.ico",
-        "installerHeaderIcon": "build/icon.ico",
-        "deleteAppDataOnUninstall": true
+      "installerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": true
     }
   },
   "dependencies": {
     "@cliqz/adblocker-electron": "^1.26.15",
     "@electron-toolkit/preload": "^1.0.2",
     "@electron-toolkit/utils": "^1.0.2",
+    "@splidejs/splide": "^4.1.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

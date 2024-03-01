@@ -25,17 +25,18 @@ try {
     if (Filter({ status: 'anons' }).length != 0) {
         anonses = Filter({ status: 'anons' })
     }
-} catch {}
+} catch {
+    /* empty */
+}
 
 export let quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/Quotes.json'), { encoding: 'utf8', flag: 'r' }))
 export var anonses = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), { encoding: 'utf8', flag: 'r' }))
-
 
 export function getAnimeInfo(id: string): any {
     return DBdata.find((res: any) => res['ids'].find((data) => data == id) == id)
 }
 
-function mainList(arr, BS): any {
+function mainList(arr: any, BS: number): any {
     let finalData = []
     for (let i = 0; i < arr.length; i++) {
         if ((i + BS) % BS == 0) {
@@ -70,14 +71,14 @@ function bubbleSort(arr1: any): any {
 function filterfunc(val: any, filters: any): any {
     let hasPassed = true
     try {
-        if (filters.status[0] != val.Status) {
+        if (filters.status[0] != val.status) {
             hasPassed = false
         } // статус
     } catch (error) {
         /* empty */
     }
     try {
-        if (filters.types[0] != val.Type) {
+        if (filters.types[0] != val.type) {
             hasPassed = false
         } // типы
     } catch (error) {
@@ -85,7 +86,7 @@ function filterfunc(val: any, filters: any): any {
     }
     try {
         for (let i in filters.genres) {
-            if (!val.Genre.split(', ').includes(filters.genres[i])) {
+            if (!val.genres.split(', ').includes(filters.genres[i])) {
                 hasPassed = false
             }
         } // жанры

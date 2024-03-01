@@ -1,18 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 async function addToList() {
-    var list = document.getElementById('list').value;
-    var anime = document.getElementsByTagName('title')[0]
+    const list = document.getElementById('list').value
+    // var anime = document.getElementsByTagName('title')[0]
     let res = await fetch('/account/addToList', {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            type:  list,
-            id:    window.location.pathname.slice(7)
+            type: list,
+            id: window.location.pathname.slice(7)
         })
-    });
-    try{
+    })
+    try {
         res = await res.json()
-        if(res){window.location.reload()}
-    }catch{}
+        if (res) {
+            window.location.reload()
+        }
+    } catch {
+        /* empty */
+    }
 }
