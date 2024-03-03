@@ -3,7 +3,7 @@
 import express, { Express, Request, Response } from 'express'
 require('./users_db')
 import { mainlist, Filter, toplist } from './anime_db'
-const app: Express = express(), port = 1488
+const app: Express = express(), port = 6694
 import cookieParser from 'cookie-parser'
 import createError from 'http-errors'
 import { globalPath } from '../app'

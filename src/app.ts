@@ -15,7 +15,7 @@ const createMinesweeper: () => void = () => {
         autoHideMenuBar: true
     })
     win.setMenu(altmenu)
-    win.loadURL('http://localhost:1488/minesweeper')
+    win.loadURL('http://localhost:6694/minesweeper')
     win.focus()
 }
 const altmenu = Menu.buildFromTemplate([
@@ -61,7 +61,7 @@ const createWindow: () => void = () => {
         autoHideMenuBar: true
     })
     win.setMenu(altmenu)
-    win.loadURL('http://localhost:1488')
+    win.loadURL('http://localhost:6694')
     win.focus()
 }
 const gotTheLock = app.requestSingleInstanceLock()
