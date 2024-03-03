@@ -1,7 +1,6 @@
-import { app, BrowserWindow, Tray, Menu, session, nativeImage, shell } from 'electron'
+import { app, BrowserWindow, Tray, Menu, session, nativeImage, shell, globalShortcut } from 'electron'
 import { version, author, name, homepage } from '../package.json'
 import { ElectronBlocker } from '@cliqz/adblocker-electron'
-import { autoUpdater } from 'electron-updater'
 import fetch from 'node-fetch'
 import path from 'node:path'
 
@@ -77,7 +76,9 @@ if (!gotTheLock) {
     })
 
     app.whenReady().then(() => {
-        autoUpdater.checkForUpdatesAndNotify()
+        globalShortcut.register('Control+Shift+I', () => {
+            return false
+        })
         if (BrowserWindow.getAllWindows().length != 0) {
             return
         }

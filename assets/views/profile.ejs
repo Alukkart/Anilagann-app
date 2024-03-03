@@ -35,150 +35,13 @@
               <a class="nav-link" href="/search" id="link">Поиск</a>
             </li>
           </ul>
-          <!-- <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal" role="button">Выйти</a> -->
         </div>
       </div>
     </nav>
 
-    <!-- <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Выход из аккаунта</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body m-auto">
-            <p>Вы уверены что хотите выйти?</p>
-          </div>
-          <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-secondary btn-p" data-bs-dismiss="modal">Отмена</button>
-            <a type="button" class="btn btn-danger" href="/account/logOut">Да</a>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
   <div class="container align-items-center" style="margin-top: 80px;">
     <div id="profileMain" class="mt-5">
       <div class="m-3">
-
-        <!-- <a type="button" class="btn btn-primary btn-p" data-bs-toggle="collapse" href="#filters">Изменить данные</a> -->
-        <!-- <div class="collapse" id="filters">
-          <div class="card-body">
-            <div class="row justify-content-center m-3">
-              <a type="button" class="btn btn-primary btn-p col-12 col-md-2 m-1" data-bs-toggle="modal" data-bs-target="#emailmodal">Изменить почту</a>
-
-              <div class="modal fade" id="emailmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Изменить почту</h1>
-                    </div>
-                    <div class="modal-body m-auto">
-                      <div>
-                        <input type="text" class="form-control" id="InpEmail" placeholder="name@example.com">
-                        <div id="EmailAlert"></div>
-                      </div>
-                    </div>
-                    <div class="modal-footer justify-content-center" id="emailModalButns">
-                      <button type="button" class="btn btn-secondary btn-p" data-bs-dismiss="modal">Отмена</button>
-                      <a type="button" class="btn btn-danger" onclick="SubmitEmail();">Да</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a type="button" class="btn btn-primary btn-p col-12 col-md-2 m-1" data-bs-toggle="modal" data-bs-target="#passmodal">Изменить пароль</a>
-              <div class="modal fade" id="passmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Смена пароля</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body m-auto" id="forms">
-                      <div class="mb-3">
-                        <input type="password" class="form-control" id="InpPassword" placeholder="Пароль">
-                        <div id="PassAlert"></div>
-                      </div>
-                      <div class="mb-2">
-                        <input type="password" class="form-control" id="InpPassword2" placeholder="Подтверждение пароля">
-                        <div id="CoincAlert"></div>
-                      </div>
-                      <div class="form-check form-switch form-check-reverse text-white mb-2">
-                        <input class="form-check-input switch" onclick="passview();" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Показать пароль</label>
-                      </div>
-                    </div>
-                    <div id="finalyAlert"></div>
-                    <div class="modal-footer justify-content-center" id="PassModalBtns">
-                      <button type="button" class="btn btn-secondary btn-p" data-bs-dismiss="modal">Отмена</button>
-                      <a type="button" class="btn btn-danger"onclick="SubmitPass();">Сохранить</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a type="button" class="btn btn-primary btn-p col-12 col-md-2 m-1" data-bs-toggle="modal" data-bs-target="#nickmodal">Изменить ник</a>
-
-              <div class="modal fade" id="nickmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Изменить ник</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body m-auto">
-                      <div>
-                        <input type="text" class="form-control" id="InpUname" placeholder="Имя пользователя">
-                        <div id="UnameAlert"></div>
-                      </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-secondary btn-p" data-bs-dismiss="modal">Отмена</button>
-                      <a type="button" class="btn btn-danger" onclick="SubmitUname();">Да</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a type="button" class="btn btn-danger col-12 col-md-2 m-1" data-bs-toggle="modal" data-bs-target="#accountremove">Удалить аккаунт</a>
-
-              <div class="modal fade" id="accountremove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Удаление аккаунта</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body m-auto">
-                      <p>Вы уверены что хотите удалить аккаунт?</p>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-secondary btn-p" data-bs-dismiss="modal">Отмена</button>
-                      <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#accountremove2">Да</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="modal fade" id="accountremove2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Удаление аккаунта</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body m-auto">
-                      <p>Вы точно уверены? Восстановление будет невозможно.</p>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                      <button type="button" class="btn btn-secondary btn-p" data-bs-dismiss="modal">Отмена</button>
-                      <a type="button" class="btn btn-danger" href="delete">Да</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        <!-- </div> -->
       <ul class="nav nav-pills justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active text-white" id="watching-tab" data-bs-toggle="tab" data-bs-target="#watching" type="button" role="tab" aria-controls="watching" aria-selected="true">Смотрю [<%= watching.length %>]</button>
@@ -200,7 +63,7 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane fade active show text-white" id="watching" role="tabpanel" aria-labelledby="watching-tab" tabindex="0">
-          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" id="cards">
+          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" style="min-height: 436px;" id="cards">
             <% if(watching.length != 0) {%>
               <% watching.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
@@ -226,7 +89,7 @@
           </div>
         </div>
         <div class="tab-pane fade text-white" id="abandoned" role="tabpanel" aria-labelledby="abandoned-tab" tabindex="0">
-          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" id="cards">
+          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" style="min-height: 436px;" id="cards">
             <% if(abandoned.length != 0) {%>
               <% abandoned.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
@@ -252,7 +115,7 @@
           </div>
         </div>
         <div class="tab-pane fade text-white" id="plan" role="tabpanel" aria-labelledby="plan-tab" tabindex="0">
-          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" id="cards">
+          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" style="min-height: 436px;" id="cards">
             <% if(plan.length != 0) {%>
               <% plan.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
@@ -278,7 +141,7 @@
           </div>
         </div>
         <div class="tab-pane fade text-white" id="viewed" role="tabpanel" aria-labelledby="viewed-tab" tabindex="0">
-          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" id="cards">
+          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" style="min-height: 436px;" id="cards">
             <% if(viewed.length != 0) {%>
               <% viewed.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
@@ -304,7 +167,7 @@
           </div>
         </div>
         <div class="tab-pane fade text-white" id="favorite" role="tabpanel" aria-labelledby="favorite-tab" tabindex="0">
-          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" id="cards">
+          <div class="row row-cols-3 justify-content-center align-items-center w-100 g-2" style="min-height: 436px;" id="cards">
             <% if(favorite.length != 0) {%>
               <% favorite.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
