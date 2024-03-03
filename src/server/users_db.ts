@@ -8,12 +8,6 @@ try {
     /* empty */
 }
 const db = new sqlite3.Database(path.join(__dirname, '/db.db').replace('app.asar', 'app.asar.unpacked'))
-// const bin = path.join(__dirname, "../../resources/hello.exe").replace("app.asar", "app.asar.unpacked");
-// const db = new sqlite3.Database(path.join(globalPath, '../data/db.db'))
-// const sqlite3 = require('sqlite3').verbose()
-// const fs = require('fs')
-// const Gpath   = path.join(globalPath, '../')
-// try{fs.mkdirSync(path.join(globalPath, './data'));}catch{}
 
 db.serialize(() => {
     db.run(
@@ -35,7 +29,6 @@ export function addToList(anime: string, list: string, callback: any): void {
             if (err) {
                 console.log(err)
             } else {
-                // console.log(row)
                 callback(true)
             }
         })
@@ -44,7 +37,7 @@ export function addToList(anime: string, list: string, callback: any): void {
             `INSERT INTO lists(animeid, list) VALUES(?, ?)
                 ON CONFLICT(animeid) DO UPDATE SET list = '${list}';`,
             [anime, list],
-            function (err: unknown) {
+            function (err: string) {
                 if (err) {
                     console.log(err)
                 } else {

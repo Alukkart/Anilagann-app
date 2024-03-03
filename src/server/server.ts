@@ -17,8 +17,10 @@ import anime from './routes/anime'
 import animelist from './routes/animelist'
 import copyright from './routes/for-copyright-holders'
 import index from './routes/index'
+import minesweeper from './routes/minesweeper'
 import search from './routes/search'
 import top from './routes/top'
+
 
 // view engine setup
 app.set('views', path.join(globalPath, './assets/views'))
@@ -36,6 +38,7 @@ app.use('/anime', anime)
 app.use('/search', search)
 app.use('/account', account)
 app.use('/animelist', animelist)
+app.use('/minesweeper', minesweeper)
 app.use('/for-copyright-holders', copyright)
 
 app.post('/getanimelist', async function (req: Request, res: Response) {

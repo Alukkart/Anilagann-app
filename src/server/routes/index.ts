@@ -35,7 +35,9 @@ router.get('/', async function (_req, res) {
         })
     } catch (error) {
         res.status(406)
-        res.render('minesweeper', {})
+        res.render('minesweeper', {
+            coldStart: true
+        })
     }
 })
 

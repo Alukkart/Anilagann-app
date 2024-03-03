@@ -1,6 +1,6 @@
 {
   "name": "anilagann",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "anilagann-app",
   "main": "./out/app.js",
   "author": "AGRIG",
@@ -13,13 +13,14 @@
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
-    "build": "electron-vite build",
+    "build": "npm run typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "npm run build && electron-builder --mac --config",
     "build:linux": "npm run build && electron-builder --linux --config"
   },
   "build": {
+    "appId": "com.github.AGRIG05.Anilagann-app",
     "productName": "Anilagann",
     "directories": {
       "buildResources": "build"
@@ -34,7 +35,6 @@
     "@cliqz/adblocker-electron": "^1.26.15",
     "@electron-toolkit/preload": "^1.0.2",
     "@electron-toolkit/utils": "^1.0.2",
-    "@splidejs/splide": "^4.1.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

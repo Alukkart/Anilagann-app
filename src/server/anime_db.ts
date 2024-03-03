@@ -5,11 +5,49 @@ import { progressBarUpdate, globalPath } from '../app'
 import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'node:path'
-var DBdata
-var minDBdata
-var ratingDBdata
-export var toplist
-export var mainlist
+
+interface Icorusel {
+    ids: string
+    poster: string
+    title: string
+    description: string
+    screen1: string
+}
+
+interface Ianime {
+    ids: string[]
+    title: string
+    rating: number
+    votes: number
+    epTotal: number | string
+    epAired: number | string
+    status: string
+    duration: number | string
+    origName: string
+    type: string
+    studios: string
+    genres: string
+    year: number
+    next_episode: string
+    description: string
+    poster: string
+    screen1: string
+    screen2: string
+    iframe: string
+}
+
+interface Iquotes {
+    anime: string
+    character: string
+    quote: string
+}
+
+var DBdata: Ianime[]
+var ratingDBdata: Ianime[]
+export var toplist: Ianime[][]
+export var mainlist: Ianime[][]
+export let quotes: Iquotes[]
+export var anonses: Icorusel[]
 try {
     fs.mkdirSync(path.join(globalPath, '/data').replace('app.asar', 'app.asar.unpacked'), { recursive: true })
 } catch {
@@ -18,16 +56,18 @@ try {
 
 try {
     DBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked'), { encoding: 'utf8', flag: 'r' }))
-    minDBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked'), { encoding: 'utf8', flag: 'r' }))
+    quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/quotes.json'), { encoding: 'utf8', flag: 'r' }))
+    anonses = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), { encoding: 'utf8', flag: 'r' }))
     ratingDBdata = bubbleSort(DBdata)
     toplist = mainList(
-        ratingDBdata.map((a: any) => ({ ...a })),
+        ratingDBdata.map((a: Ianime) => ({ ...a })),
         20
     )
     mainlist = mainList(
-        DBdata.map((a: any) => ({ ...a })),
+        DBdata.map((a: Ianime) => ({ ...a })),
         32
     )
+
     if (Filter({ status: 'anons' }).length != 0) {
         anonses = Filter({ status: 'anons' })
     }
@@ -35,15 +75,12 @@ try {
     /* empty */
 }
 
-export let quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/Quotes.json'), { encoding: 'utf8', flag: 'r' }))
-export var anonses = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), { encoding: 'utf8', flag: 'r' }))
-
-export function getAnimeInfo(id: string): any {
-    return DBdata.find((res: any) => res['ids'].find((data) => data == id) == id)
+export function getAnimeInfo(id: string): Ianime | undefined {
+    return DBdata.find((res: Ianime) => res['ids'].find((data) => data == id) == id)
 }
 
-function mainList(arr: any, BS: number): any {
-    let finalData = []
+function mainList(arr: Ianime[], BS: number): Ianime[][] {
+    let finalData: Ianime[][] = []
     for (let i = 0; i < arr.length; i++) {
         if ((i + BS) % BS == 0) {
             finalData[Math.floor(i / BS)] = []
@@ -53,9 +90,9 @@ function mainList(arr: any, BS: number): any {
     return finalData
 }
 
-function bubbleSort(arr1: any): any {
-    let arr = arr1.map((a: any) => ({ ...a })) // Покупаем накротики в кредит.
-    let isSorted: any // Продаём наркотики за крипту.
+function bubbleSort(arr1: Ianime[]): Ianime[] {
+    let arr = arr1.map((a: Ianime) => ({ ...a })) // Покупаем накротики в кредит.
+    let isSorted: boolean // Продаём наркотики за крипту.
     for (let i = 0; i < arr.length; i++) {
         // Нанимаем агента по недвижимости в Дубае
         isSorted = true // Покупаем за крипту недвижимость в Дубае на стадии катлована.
@@ -111,7 +148,7 @@ function filterfunc(val: any, filters: any): any {
     }
 }
 
-export function Filter(req): any {
+export function Filter(req: any): any {
     let filters = {}
     for (let index in { genres: true, years: true, status: true, types: true, sort: true }) {
         try {
@@ -123,7 +160,6 @@ export function Filter(req): any {
     if (req.sort == 'rating') {
         var filtered = ratingDBdata.filter((val) => filterfunc(val, filters))
     } else {
-        // eslint-disable-next-line no-redeclare
         var filtered = DBdata.filter((val) => filterfunc(val, filters))
     }
     if (filtered.length < 32) {
@@ -141,97 +177,113 @@ async function saveDB(url: string): Promise<any> {
     } catch (error) {
         /* empty */
     }
-    return [response.mainData, response.miniData]
+    return [response.mainData, response.miniData, response.quotes, response.defaultCrousel]
 }
 
 saveDB('https://db-worker-32o4.onrender.com/').then((data) => {
-    progressBarUpdate(9, 1)
+    progressBarUpdate(12, 1)
     DBdata = data[0]
-    progressBarUpdate(9, 2)
-    minDBdata = data[1]
-    progressBarUpdate(9, 3)
+    progressBarUpdate(12, 2)
     ratingDBdata = bubbleSort(DBdata)
-    progressBarUpdate(9, 4)
+    progressBarUpdate(12, 3)
     mainlist = mainList(
         DBdata.map((a) => ({ ...a })),
         32
     )
-    progressBarUpdate(9, 5)
+    progressBarUpdate(12, 4)
     toplist = mainList(
         ratingDBdata.map((a) => ({ ...a })),
         20
     )
-    progressBarUpdate(9, 6)
-    quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/Quotes.json'), { encoding: 'utf8', flag: 'r' }))
-    progressBarUpdate(9, 7)
+    progressBarUpdate(12, 5)
+    quotes = data[2]
+    progressBarUpdate(12, 6)
     if (Filter({ status: 'anons' }).length != 0) {
         anonses = Filter({ status: 'anons' })
+        progressBarUpdate(12, 7)
     } else {
-        anonses = JSON.parse(
-            fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), {
-                encoding: 'utf8',
-                flag: 'r'
-            })
-        )
+        anonses = data[3]
+        progressBarUpdate(12, 7)
     }
-    progressBarUpdate(9, 8)
-    fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(DBdata), (err) => {
+    progressBarUpdate(12, 8)
+    fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[0]), (err) => {
         if (err) {
             console.log(err)
         }
     })
-    fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(minDBdata), (err) => {
+    progressBarUpdate(12, 9)
+    fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[1]), (err) => {
         if (err) {
             console.log(err)
         }
     })
-    progressBarUpdate(9, 9)
+    progressBarUpdate(12, 10)
+    fs.writeFile(path.join(path.join(globalPath, '/data/quotes.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[2]), (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+    progressBarUpdate(12, 11)
+    fs.writeFile(path.join(path.join(globalPath, '/data/defaultCrousel.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[3]), (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+    progressBarUpdate(12, 12)
     console.log('data done')
 })
 
 setInterval(() => {
     saveDB('https://db-worker-32o4.onrender.com/').then((data) => {
-        progressBarUpdate(9, 1)
+        progressBarUpdate(12, 1)
         DBdata = data[0]
-        progressBarUpdate(9, 2)
-        minDBdata = data[1]
-        progressBarUpdate(9, 3)
+        progressBarUpdate(12, 2)
         ratingDBdata = bubbleSort(DBdata)
-        progressBarUpdate(9, 4)
+        progressBarUpdate(12, 3)
         mainlist = mainList(
             DBdata.map((a) => ({ ...a })),
             32
         )
-        progressBarUpdate(9, 5)
+        progressBarUpdate(12, 4)
         toplist = mainList(
             ratingDBdata.map((a) => ({ ...a })),
             20
         )
-        progressBarUpdate(9, 6)
-        quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/Quotes.json'), { encoding: 'utf8', flag: 'r' }))
-        progressBarUpdate(9, 7)
+        progressBarUpdate(12, 5)
+        quotes = data[2]
+        progressBarUpdate(12, 6)
         if (Filter({ status: 'anons' }).length != 0) {
             anonses = Filter({ status: 'anons' })
+            progressBarUpdate(12, 7)
         } else {
-            anonses = JSON.parse(
-                fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), {
-                    encoding: 'utf8',
-                    flag: 'r'
-                })
-            )
+            anonses = data[3]
+            progressBarUpdate(12, 7)
         }
-        progressBarUpdate(9, 8)
-        fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(DBdata), (err) => {
+        progressBarUpdate(12, 8)
+        fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[0]), (err) => {
             if (err) {
                 console.log(err)
             }
         })
-        fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(minDBdata), (err) => {
+        progressBarUpdate(12, 9)
+        fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[1]), (err) => {
             if (err) {
                 console.log(err)
             }
         })
-        progressBarUpdate(9, 9)
+        progressBarUpdate(12, 10)
+        fs.writeFile(path.join(path.join(globalPath, '/data/quotes.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[2]), (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        progressBarUpdate(12, 11)
+        fs.writeFile(path.join(path.join(globalPath, '/data/defaultCrousel.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[3]), (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        progressBarUpdate(12, 12)
         console.log('data done')
     })
 }, 5400000)

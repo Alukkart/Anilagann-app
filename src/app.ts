@@ -1,10 +1,56 @@
-import { app, BrowserWindow, Tray, Menu, session, nativeImage } from 'electron'
-// import fs from 'fs'
-export const globalPath = app.getAppPath()
+import { app, BrowserWindow, Tray, Menu, session, nativeImage, shell } from 'electron'
+import { version, author, name, homepage } from '../package.json'
 import { ElectronBlocker } from '@cliqz/adblocker-electron'
-import path from 'node:path'
-const appIcon = path.join(globalPath, './assets/icon.ico')
+import { autoUpdater } from 'electron-updater'
 import fetch from 'node-fetch'
+import path from 'node:path'
+
+export const globalPath = app.getAppPath()
+const appIcon = path.join(globalPath, './assets/icon.ico')
+const createMinesweeper: () => void = () => {
+    win = new BrowserWindow({
+        width: 900,
+        height: 900,
+        icon: appIcon,
+        autoHideMenuBar: true
+    })
+    win.setMenu(altmenu)
+    win.loadURL('http://localhost:1488/minesweeper')
+    win.focus()
+}
+const altmenu = Menu.buildFromTemplate([
+    {
+        label: 'About',
+        type: 'normal',
+        click: (): unknown => {
+            app.setAboutPanelOptions({
+                applicationName: name,
+                applicationVersion: version,
+                credits: author,
+                authors: [author],
+                website: homepage,
+                iconPath: path.join(globalPath, './assets/icon.ico')
+            })
+            return app.showAboutPanel()
+        }
+    },
+    {
+        label: 'Github',
+        type: 'normal',
+
+        click: (): unknown => {
+            return shell.openExternal('https://github.com/AGRIG05/Anilagann-app')
+        }
+    },
+    {
+        label: 'Minesweeper',
+        type: 'normal',
+
+        click: (): unknown => {
+            return createMinesweeper()
+        }
+    }
+])
 
 let win: BrowserWindow
 const createWindow: () => void = () => {
@@ -14,8 +60,63 @@ const createWindow: () => void = () => {
         icon: appIcon,
         autoHideMenuBar: true
     })
+    win.setMenu(altmenu)
     win.loadURL('http://localhost:1488')
     win.focus()
+}
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (!gotTheLock) {
+    app.quit()
+} else {
+    app.on('second-instance', () => {
+        if (win) {
+            if (win.isMinimized()) win.restore()
+            win.focus()
+        }
+    })
+
+    app.whenReady().then(() => {
+        autoUpdater.checkForUpdatesAndNotify()
+        if (BrowserWindow.getAllWindows().length != 0) {
+            return
+        }
+        //* run server
+        require('./server/server.js')
+        //* create app window
+        createWindow()
+        const tray = new Tray(nativeImage.createFromPath(appIcon))
+        const contextMenu = Menu.buildFromTemplate([
+            {
+                label: 'Open Anilagann',
+                type: 'normal',
+
+                click: (): unknown => {
+                    return smoothOpening(150)
+                }
+            },
+            { label: 'Close', type: 'normal', role: 'quit' }
+        ])
+        tray.setContextMenu(contextMenu)
+        tray.addListener('double-click', () => {
+            smoothOpening(150)
+        })
+        tray.eventNames
+        tray.setToolTip('Anilagann')
+
+        //* app to tray event
+        win.on('minimize', () => {
+            setTimeout(() => {
+                win.hide()
+            }, 200)
+        })
+
+        app.on('activate', () => {
+            if (BrowserWindow.getAllWindows().length === 0) {
+                createWindow()
+            }
+        })
+    })
 }
 
 function smoothOpening(delay: number): void {
@@ -28,47 +129,6 @@ function smoothOpening(delay: number): void {
         win.focus()
     }
 }
-
-app.whenReady().then(() => {
-    if (BrowserWindow.getAllWindows().length != 0) {
-        return
-    }
-    //* run server
-    require('./server/server.js')
-    //* create app window
-    createWindow()
-    const tray = new Tray(nativeImage.createFromPath(appIcon))
-    const contextMenu = Menu.buildFromTemplate([
-        {
-            label: 'Open Anilagann',
-            type: 'normal',
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            click: () => {
-                smoothOpening(150)
-            }
-        },
-        { label: 'Close', type: 'normal', role: 'quit' }
-    ])
-    tray.setContextMenu(contextMenu)
-    tray.addListener('double-click', () => {
-        smoothOpening(150)
-    })
-    tray.eventNames
-    tray.setToolTip('Anilagann')
-
-    //* app to tray event
-    win.on('minimize', () => {
-        setTimeout(() => {
-            win.hide()
-        }, 200)
-    })
-
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
-        }
-    })
-})
 
 //* adblocker
 ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
@@ -92,5 +152,3 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
-
-module.exports.progressBarUpdate = progressBarUpdate
