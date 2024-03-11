@@ -38,7 +38,7 @@ const altmenu = Menu.buildFromTemplate([
         type: 'normal',
 
         click: (): unknown => {
-            return shell.openExternal('https://github.com/AGRIG05/Anilagann-app')
+            return shell.openExternal('https://github.com/Alukkart/Anilagann-app')
         }
     },
     {
@@ -153,3 +153,4 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
+
