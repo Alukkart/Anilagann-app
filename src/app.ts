@@ -112,11 +112,6 @@ if (!gotTheLock) {
         tray.setToolTip('Anilagann')
 
         //* app to tray event
-        // win.on('minimize', () => {
-        //     setTimeout(() => {
-        //         win.hide()
-        //     }, 200)
-        // })
         win.on('close', function (event) {
             if (!isQuiting) {
                 event.preventDefault()
