@@ -5,6 +5,7 @@ import fetch from 'node-fetch'
 import path from 'node:path'
 
 export const globalPath = app.getAppPath()
+let isQuiting: boolean
 const appIcon = path.join(globalPath, './assets/icon.ico')
 const createMinesweeper: () => void = () => {
     win = new BrowserWindow({
@@ -17,6 +18,11 @@ const createMinesweeper: () => void = () => {
     win.loadURL('http://localhost:6694/minesweeper')
     win.focus()
 }
+
+app.on('before-quit', function () {
+    isQuiting = true
+})
+
 const altmenu = Menu.buildFromTemplate([
     {
         label: 'About',
@@ -106,10 +112,17 @@ if (!gotTheLock) {
         tray.setToolTip('Anilagann')
 
         //* app to tray event
-        win.on('minimize', () => {
-            setTimeout(() => {
+        // win.on('minimize', () => {
+        //     setTimeout(() => {
+        //         win.hide()
+        //     }, 200)
+        // })
+        win.on('close', function (event) {
+            if (!isQuiting) {
+                event.preventDefault()
                 win.hide()
-            }, 200)
+                event.returnValue = false
+            }
         })
 
         app.on('activate', () => {
@@ -153,4 +166,3 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
-
