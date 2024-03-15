@@ -6,7 +6,7 @@ import path from 'node:path'
 
 export const globalPath = app.getAppPath()
 let isQuiting: boolean
-const appIcon = path.join(globalPath, './assets/icon.ico')
+const appIcon = path.join(globalPath, './assets/icon.png')
 const createMinesweeper: () => void = () => {
     win = new BrowserWindow({
         width: 900,
@@ -116,7 +116,6 @@ if (!gotTheLock) {
             if (!isQuiting) {
                 event.preventDefault()
                 win.hide()
-                event.returnValue = false
             }
         })
 
