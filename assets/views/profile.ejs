@@ -67,7 +67,7 @@
             <% if(watching.length != 0) {%>
               <% watching.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
-                  <a href="/anime/<%= anime.id %>">
+                  <a href="/anime/<%= anime.ids[0] %>">
                   <% if(anime.poster == null){ %>
                     <img id="poster" src="poster" class=" rounded-0" alt="" style="width: 286px; height: 404px">
                   <% }else{ %>

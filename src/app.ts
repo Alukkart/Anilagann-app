@@ -5,6 +5,8 @@ import fetch from 'node-fetch'
 import path from 'node:path'
 
 export const globalPath = app.getAppPath()
+export const dataPath = path.join(app.getPath('home'), '.anilagann')
+
 let isQuiting: boolean
 const appIcon = path.join(globalPath, './assets/icon.png')
 const createMinesweeper: () => void = () => {
@@ -12,7 +14,7 @@ const createMinesweeper: () => void = () => {
         width: 900,
         height: 900,
         icon: appIcon,
-        autoHideMenuBar: true
+        autoHideMenuBar: true,
     })
     win.setMenu(altmenu)
     win.loadURL('http://localhost:6694/minesweeper')
@@ -108,7 +110,6 @@ if (!gotTheLock) {
         tray.addListener('double-click', () => {
             smoothOpening(150)
         })
-        tray.eventNames
         tray.setToolTip('Anilagann')
 
         //* app to tray event

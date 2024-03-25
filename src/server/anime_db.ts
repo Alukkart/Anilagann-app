@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 /* eslint-disable no-var */
-import { progressBarUpdate, globalPath } from '../app'
+import { progressBarUpdate, dataPath } from '../app'
 import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'node:path'
@@ -49,15 +49,15 @@ export var mainlist: Ianime[][]
 export let quotes: Iquotes[]
 export var anonses: Icorusel[]
 try {
-    fs.mkdirSync(path.join(globalPath, '/data').replace('app.asar', 'app.asar.unpacked'), { recursive: true })
+    fs.mkdirSync(path.join(dataPath, '/data').replace('app.asar', 'app.asar.unpacked'), { recursive: true })
 } catch {
     /* empty */
 }
 
 try {
-    DBdata = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked'), { encoding: 'utf8', flag: 'r' }))
-    quotes = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/quotes.json'), { encoding: 'utf8', flag: 'r' }))
-    anonses = JSON.parse(fs.readFileSync(path.join(globalPath, '/data/defaultCrousel.json'), { encoding: 'utf8', flag: 'r' }))
+    DBdata = JSON.parse(fs.readFileSync(path.join(dataPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked'), { encoding: 'utf8', flag: 'r' }))
+    quotes = JSON.parse(fs.readFileSync(path.join(dataPath, '/data/quotes.json'), { encoding: 'utf8', flag: 'r' }))
+    anonses = JSON.parse(fs.readFileSync(path.join(dataPath, '/data/defaultCrousel.json'), { encoding: 'utf8', flag: 'r' }))
     ratingDBdata = bubbleSort(DBdata)
     toplist = mainList(
         ratingDBdata.map((a: Ianime) => ({ ...a })),
@@ -206,25 +206,25 @@ saveDB('https://db-worker-32o4.onrender.com/').then((data) => {
         progressBarUpdate(12, 7)
     }
     progressBarUpdate(12, 8)
-    fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[0]), (err) => {
+    fs.writeFile(path.join(path.join(dataPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[0]), (err) => {
         if (err) {
             console.log(err)
         }
     })
     progressBarUpdate(12, 9)
-    fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[1]), (err) => {
+    fs.writeFile(path.join(path.join(dataPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[1]), (err) => {
         if (err) {
             console.log(err)
         }
     })
     progressBarUpdate(12, 10)
-    fs.writeFile(path.join(path.join(globalPath, '/data/quotes.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[2]), (err) => {
+    fs.writeFile(path.join(path.join(dataPath, '/data/quotes.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[2]), (err) => {
         if (err) {
             console.log(err)
         }
     })
     progressBarUpdate(12, 11)
-    fs.writeFile(path.join(path.join(globalPath, '/data/defaultCrousel.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[3]), (err) => {
+    fs.writeFile(path.join(path.join(dataPath, '/data/defaultCrousel.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[3]), (err) => {
         if (err) {
             console.log(err)
         }
@@ -260,25 +260,25 @@ setInterval(() => {
             progressBarUpdate(12, 7)
         }
         progressBarUpdate(12, 8)
-        fs.writeFile(path.join(path.join(globalPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[0]), (err) => {
+        fs.writeFile(path.join(path.join(dataPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[0]), (err) => {
             if (err) {
                 console.log(err)
             }
         })
         progressBarUpdate(12, 9)
-        fs.writeFile(path.join(path.join(globalPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[1]), (err) => {
+        fs.writeFile(path.join(path.join(dataPath, '/data/min.db.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[1]), (err) => {
             if (err) {
                 console.log(err)
             }
         })
         progressBarUpdate(12, 10)
-        fs.writeFile(path.join(path.join(globalPath, '/data/quotes.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[2]), (err) => {
+        fs.writeFile(path.join(path.join(dataPath, '/data/quotes.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[2]), (err) => {
             if (err) {
                 console.log(err)
             }
         })
         progressBarUpdate(12, 11)
-        fs.writeFile(path.join(path.join(globalPath, '/data/defaultCrousel.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[3]), (err) => {
+        fs.writeFile(path.join(path.join(dataPath, '/data/defaultCrousel.json').replace('app.asar', 'app.asar.unpacked')), JSON.stringify(data[3]), (err) => {
             if (err) {
                 console.log(err)
             }
