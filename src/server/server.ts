@@ -42,7 +42,6 @@ app.use('/minesweeper', minesweeper)
 app.use('/for-copyright-holders', copyright)
 
 app.post('/getanimelist', async function (req: Request, res: Response) {
-    console.log(req.body)
     if (req.body.genres == undefined && req.body.years == undefined && req.body.status == undefined && req.body.types == undefined && req.body.sort == 'rating') {
         if (toplist[req.body.page] != undefined) {
             res.send(toplist[req.body.page])

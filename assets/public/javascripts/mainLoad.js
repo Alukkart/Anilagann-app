@@ -60,8 +60,12 @@ async function fetchPosts() {
     try {
         res = await res.json()
     } catch {
+        /* empty */
+    }
+    if (res === false){
         document.getElementById('cards').innerHTML = `<div class="text-center"><h3>Ничего не найдено</h3></div>`
     }
+
     try {
         document.getElementById('spinner').remove()
     } catch {
@@ -72,7 +76,7 @@ async function fetchPosts() {
     try {
         res.forEach(appendPost)
     } catch {
-        /* empty */
+        appendPost(res)
     }
     if (!nextPage) shouldLoad = false
     isLoading = false

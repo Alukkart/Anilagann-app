@@ -3,22 +3,21 @@ import { version, author, name, homepage } from '../package.json'
 import { ElectronBlocker } from '@cliqz/adblocker-electron'
 import fetch from 'node-fetch'
 import path from 'node:path'
-
 export const globalPath = app.getAppPath()
 export const dataPath = path.join(app.getPath('home'), '.anilagann')
 
 let isQuiting: boolean
 const appIcon = path.join(globalPath, './assets/icon.png')
 const createMinesweeper: () => void = () => {
-    win = new BrowserWindow({
+    let Mwin = new BrowserWindow({
         width: 900,
         height: 900,
         icon: appIcon,
         autoHideMenuBar: true,
     })
-    win.setMenu(altmenu)
-    win.loadURL('http://localhost:6694/minesweeper')
-    win.focus()
+    Mwin.setMenu(altmenu)
+    Mwin.loadURL('http://localhost:6694/minesweeper')
+    Mwin.focus()
 }
 
 app.on('before-quit', function () {
@@ -82,7 +81,7 @@ if (!gotTheLock) {
             win.focus()
         }
     })
-
+    
     app.whenReady().then(() => {
         globalShortcut.register('Control+Shift+I', () => {
             return false
@@ -94,6 +93,7 @@ if (!gotTheLock) {
         require('./server/server.js')
         //* create app window
         createWindow()
+        win.webContents.openDevTools()
         const tray = new Tray(nativeImage.createFromPath(appIcon))
         const contextMenu = Menu.buildFromTemplate([
             {

@@ -35,12 +35,19 @@ dmg:
   artifactName: ${productName}-${version}.${ext}
 linux:
   target:
-    - AppImage
-    - snap
-    - deb
-    - rpm
+    # - AppImage
+    # - snap
+    # - deb
+    - flatpak
+    # - rpm
+  icon: build/icon.png
   category: AudioVideo
   maintainer: electronjs.org
+flatpak:
+  
+rpm:
+  packageCategory: AudioVideo
+  packageName: Anilagann-rpm
   icon: build/icon.png
 appImage:
   artifactName: ${productName}-${version}.${ext}
