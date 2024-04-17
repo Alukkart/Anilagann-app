@@ -6,7 +6,7 @@ import { mainlist, Filter, toplist } from './anime_db'
 const app: Express = express(), port = 6694
 import cookieParser from 'cookie-parser'
 import createError from 'http-errors'
-import { globalPath } from '../app'
+import { globalPath, dataPath } from '../app'
 import path from 'node:path'
 import helmet from 'helmet'
 import logger from 'morgan'
@@ -71,7 +71,11 @@ app.get('/robots.txt', function (_req: Request, res: Response) {
 })
 
 app.get('/data/min.db.json', function (_req: Request, res: Response) {
-    res.sendFile(globalPath + '/data/min.db.json')
+    res.sendFile(dataPath + '/data/min.db.json')
+})
+
+app.get('/poster', function (_req: Request, res: Response) {
+    res.sendFile(path.join(globalPath, './assets/public/images/poster.webp'))
 })
 
 // catch 404 and forward to error handler

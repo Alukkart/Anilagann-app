@@ -16,6 +16,7 @@ const createMinesweeper: () => void = () => {
         autoHideMenuBar: true,
     })
     Mwin.setMenu(altmenu)
+    // Mwin.loadURL('https://d3ward.github.io/toolz/adblock')
     Mwin.loadURL('http://localhost:6694/minesweeper')
     Mwin.focus()
 }
@@ -82,7 +83,7 @@ if (!gotTheLock) {
         }
     })
     
-    app.whenReady().then(() => {
+    app.whenReady().then( async() => {
         globalShortcut.register('Control+Shift+I', () => {
             return false
         })
@@ -93,7 +94,8 @@ if (!gotTheLock) {
         require('./server/server.js')
         //* create app window
         createWindow()
-        win.webContents.openDevTools()
+        // win.webContents.openDevTools()
+
         const tray = new Tray(nativeImage.createFromPath(appIcon))
         const contextMenu = Menu.buildFromTemplate([
             {
