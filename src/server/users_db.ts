@@ -2,12 +2,14 @@
 import path from 'path'
 import * as sqlite3 from 'sqlite3'
 import { mkdirSync } from 'fs'
+import { dataPath } from "../app";
+
 try {
-    mkdirSync(path.join(__dirname).replace('app.asar', 'app.asar.unpacked'), { recursive: true })
-} catch {
-    /* empty */
+    mkdirSync(path.join(dataPath).replace('app.asar', 'app.asar.unpacked'), { recursive: true })
+} catch (err){
+    throw err
 }
-const db = new sqlite3.Database(path.join(__dirname, '/db.db').replace('app.asar', 'app.asar.unpacked'))
+const db = new sqlite3.Database(path.join(dataPath, '.anilagann.db').replace('app.asar', 'app.asar.unpacked'))
 
 db.serialize(() => {
     db.run(

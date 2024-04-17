@@ -3,20 +3,22 @@ import { version, author, name, homepage } from '../package.json'
 import { ElectronBlocker } from '@cliqz/adblocker-electron'
 import fetch from 'node-fetch'
 import path from 'node:path'
-
 export const globalPath = app.getAppPath()
+export const dataPath = path.join(app.getPath('home'), '.anilagann')
+
 let isQuiting: boolean
 const appIcon = path.join(globalPath, './assets/icon.png')
 const createMinesweeper: () => void = () => {
-    win = new BrowserWindow({
+    let Mwin = new BrowserWindow({
         width: 900,
         height: 900,
         icon: appIcon,
-        autoHideMenuBar: true
+        autoHideMenuBar: true,
     })
-    win.setMenu(altmenu)
-    win.loadURL('http://localhost:6694/minesweeper')
-    win.focus()
+    Mwin.setMenu(altmenu)
+    // Mwin.loadURL('https://d3ward.github.io/toolz/adblock')
+    Mwin.loadURL('http://localhost:6694/minesweeper')
+    Mwin.focus()
 }
 
 app.on('before-quit', function () {
@@ -80,8 +82,8 @@ if (!gotTheLock) {
             win.focus()
         }
     })
-
-    app.whenReady().then(() => {
+    
+    app.whenReady().then( async() => {
         globalShortcut.register('Control+Shift+I', () => {
             return false
         })
@@ -92,6 +94,8 @@ if (!gotTheLock) {
         require('./server/server.js')
         //* create app window
         createWindow()
+        // win.webContents.openDevTools()
+
         const tray = new Tray(nativeImage.createFromPath(appIcon))
         const contextMenu = Menu.buildFromTemplate([
             {
@@ -108,7 +112,6 @@ if (!gotTheLock) {
         tray.addListener('double-click', () => {
             smoothOpening(150)
         })
-        tray.eventNames
         tray.setToolTip('Anilagann')
 
         //* app to tray event

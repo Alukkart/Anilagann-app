@@ -67,7 +67,7 @@
             <% if(watching.length != 0) {%>
               <% watching.forEach(function(anime) { %>
                 <div id="card" class="card col m-lg-3 m-md-1 m-sm-1 p-0" style="width: 288px;">
-                  <a href="/anime/<%= anime.id %>">
+                  <a href="/anime/<%= anime.ids[0] %>">
                   <% if(anime.poster == null){ %>
                     <img id="poster" src="poster" class=" rounded-0" alt="" style="width: 286px; height: 404px">
                   <% }else{ %>
@@ -198,7 +198,7 @@
   </div>
   <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 border-top">
-      <p class="col-md-4 mb-0 text-body-white">© 2023 Anilagann</p>
+      <p class="col-md-4 mb-0 text-body-white">© 2024 Anilagann</p>
   
       <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
         <img src="/images/logo.webp" class="d-block rato ratio16x9" alt="Anilagann" width="152px">
@@ -207,7 +207,7 @@
       <ul class="nav col-md-4 justify-content-end">
         <li class="nav-item"><a href="/for-copyright-holders" class="nav-link px-2 text-white">Для правообладателей</a></li>
 
-        <li class="nav-item"><a href="https://github.com/Alukkart/Anilagann-app" class="nav-link px-2 text-white">Github</a></li>
+        
       </ul>
     </footer>
   </div>

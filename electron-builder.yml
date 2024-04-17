@@ -21,6 +21,9 @@ nsis:
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
+  installerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  deleteAppDataOnUninstall: true
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
@@ -32,11 +35,20 @@ dmg:
   artifactName: ${productName}-${version}.${ext}
 linux:
   target:
-    - AppImage
-    - snap
-    - deb
+    # - AppImage
+    # - snap
+    # - deb
+    - flatpak
+    # - rpm
+  icon: build/icon.png
+  category: AudioVideo
   maintainer: electronjs.org
-  category: Utility
+flatpak:
+  
+rpm:
+  packageCategory: AudioVideo
+  packageName: Anilagann-rpm
+  icon: build/icon.png
 appImage:
   artifactName: ${productName}-${version}.${ext}
 npmRebuild: false
