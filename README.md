@@ -1,6 +1,6 @@
 # Anilagann
 
-Anilagann - приложение предназначенное для просмотра аниме с разными озвучками без рекламы прямо на вашем пк.
+Anilagann - приложение предназначенное для просмотра аниме с разными озвучками без рекламы(нет) прямо на вашем пк.
 [![powered by Ghostery](https://img.shields.io/badge/ghostery-powered-blue?logo=ghostery)](https://github.com/ghostery/adblocker)
 
 ## Содержание
