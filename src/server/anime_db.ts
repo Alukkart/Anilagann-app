@@ -139,7 +139,7 @@ function filterfunc(val: any, filters: any): any {
     try {
         if (val.Year < Math.min(Number(filters.years[0]), Number(filters.years[1])) || val.Year > Math.max(Number(filters.years[0]), Number(filters.years[1]))) {
             hasPassed = false
-        } //года
+        } //гойда
     } catch (error) {
         /* empty */
     }
@@ -170,7 +170,21 @@ export function Filter(req: any): any {
 }
 
 async function saveDB(url: string): Promise<any> {
-    let response: any = await fetch(url)
+    let updateTime:number
+    try{
+        updateTime = fs.statSync(path.join(path.join(dataPath, '/data/db.json').replace('app.asar', 'app.asar.unpacked'))).mtimeMs
+    }catch{
+        updateTime = 0
+    }
+    let response: any = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            updateTime: updateTime
+        })
+    })
     response = await response.json()
     try {
         progressBarUpdate(9, 0)
@@ -179,7 +193,7 @@ async function saveDB(url: string): Promise<any> {
     }
     return [response.mainData, response.miniData, response.quotes, response.defaultCrousel]
 }
-
+// http://localhost:10000
 saveDB('https://db-worker-32o4.onrender.com/').then((data) => {
     progressBarUpdate(12, 1)
     DBdata = data[0]

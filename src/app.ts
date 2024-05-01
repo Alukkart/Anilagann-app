@@ -1,5 +1,4 @@
-import { app, BrowserWindow, Tray, Menu, session, nativeImage, shell, globalShortcut } from 'electron'
-import { version, author, name, homepage } from '../package.json'
+import { app, BrowserWindow, Tray, Menu, session, nativeImage, shell} from 'electron'
 import { ElectronBlocker } from '@cliqz/adblocker-electron'
 import fetch from 'node-fetch'
 import path from 'node:path'
@@ -9,16 +8,27 @@ export const dataPath = path.join(app.getPath('home'), '.anilagann')
 let isQuiting: boolean
 const appIcon = path.join(globalPath, './assets/icon.png')
 const createMinesweeper: () => void = () => {
-    let Mwin = new BrowserWindow({
+    const Mwin = new BrowserWindow({
         width: 900,
         height: 900,
         icon: appIcon,
-        autoHideMenuBar: true,
+        autoHideMenuBar: true
     })
     Mwin.setMenu(altmenu)
-    // Mwin.loadURL('https://d3ward.github.io/toolz/adblock')
     Mwin.loadURL('http://localhost:6694/minesweeper')
     Mwin.focus()
+}
+
+const createAbout: () => void = () => {
+    const Awin = new BrowserWindow({
+        width: 600,
+        height: 400,
+        icon: appIcon,
+        autoHideMenuBar: true
+    })
+    Awin.setMenu(altmenu)
+    Awin.loadURL('http://localhost:6694/about')
+    Awin.focus()
 }
 
 app.on('before-quit', function () {
@@ -30,15 +40,15 @@ const altmenu = Menu.buildFromTemplate([
         label: 'About',
         type: 'normal',
         click: (): unknown => {
-            app.setAboutPanelOptions({
-                applicationName: name,
-                applicationVersion: version,
-                credits: author,
-                authors: [author],
-                website: homepage,
-                iconPath: path.join(globalPath, './assets/icon.ico')
-            })
-            return app.showAboutPanel()
+            return createAbout()
+        }
+    },
+    {
+        label: 'Reload',
+        accelerator: 'Control+R',
+        type: 'normal',
+        click: (): unknown => {
+            return win.webContents.reload()
         }
     },
     {
@@ -55,6 +65,14 @@ const altmenu = Menu.buildFromTemplate([
 
         click: (): unknown => {
             return createMinesweeper()
+        }
+    },
+    {
+        label: 'Open in browser',
+        type: 'normal',
+
+        click: (): unknown => {
+            return shell.openExternal(win.webContents.getURL())
         }
     }
 ])
@@ -82,11 +100,8 @@ if (!gotTheLock) {
             win.focus()
         }
     })
-    
-    app.whenReady().then( async() => {
-        globalShortcut.register('Control+Shift+I', () => {
-            return false
-        })
+
+    app.whenReady().then(async () => {
         if (BrowserWindow.getAllWindows().length != 0) {
             return
         }
@@ -134,7 +149,7 @@ function smoothOpening(delay: number): void {
     if (!win.isVisible()) {
         win.minimize()
         setTimeout(() => {
-            win.show()
+            win.restore()
         }, delay)
     } else {
         win.focus()

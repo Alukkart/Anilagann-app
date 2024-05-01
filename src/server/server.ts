@@ -19,6 +19,7 @@ import copyright from './routes/for-copyright-holders'
 import index from './routes/index'
 import minesweeper from './routes/minesweeper'
 import search from './routes/search'
+import about from './routes/about'
 import top from './routes/top'
 
 
@@ -34,6 +35,7 @@ app.use(cors())
 app.use(helmet({contentSecurityPolicy: false, hsts: true, referrerPolicy: false}))
 app.use('/', index)
 app.use('/top', top)
+app.use('/about', about)
 app.use('/anime', anime)
 app.use('/search', search)
 app.use('/account', account)
