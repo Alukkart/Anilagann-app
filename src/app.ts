@@ -7,28 +7,59 @@ export const dataPath = path.join(app.getPath('home'), '.anilagann')
 
 let isQuiting: boolean
 const appIcon = path.join(globalPath, './assets/icon.png')
+
+var Mwin:BrowserWindow | undefined = undefined
 const createMinesweeper: () => void = () => {
-    const Mwin = new BrowserWindow({
-        width: 900,
-        height: 900,
-        icon: appIcon,
-        autoHideMenuBar: true
-    })
-    Mwin.setMenu(altmenu)
-    Mwin.loadURL('http://localhost:6694/minesweeper')
-    Mwin.focus()
+    if (Mwin) {
+        if (Mwin.isMinimized()) Mwin.restore()
+            Mwin.focus()
+    }else{
+        Mwin = new BrowserWindow({
+            width: 900,
+            height: 900,
+            icon: appIcon,
+            autoHideMenuBar: true
+        })
+        Mwin.setMenu(altmenu)
+        Mwin.loadURL('http://localhost:6694/minesweeper')
+        Mwin.focus()
+    }
 }
 
+var Awin:BrowserWindow | undefined = undefined
 const createAbout: () => void = () => {
-    const Awin = new BrowserWindow({
-        width: 600,
-        height: 400,
-        icon: appIcon,
-        autoHideMenuBar: true
-    })
-    Awin.setMenu(altmenu)
-    Awin.loadURL('http://localhost:6694/about')
-    Awin.focus()
+    if (Awin) {
+        if (Awin.isMinimized()) Awin.restore()
+            Awin.focus()
+    }else{
+        Awin = new BrowserWindow({
+            width: 600,
+            height: 400,
+            icon: appIcon,
+            autoHideMenuBar: true
+        })
+        Awin.setMenu(altmenu)
+        Awin.loadURL('http://localhost:6694/about')
+        Awin.focus()
+    }
+}
+
+var Swin:BrowserWindow | undefined = undefined
+const createSettings: () => void = () => {
+    if (Swin) {
+        if (Swin.isMinimized()) Swin.restore()
+            Swin.focus()
+    }else{
+        Swin = new BrowserWindow({
+            width: 600,
+            height: 400,
+            icon: appIcon,
+            autoHideMenuBar: true
+        })
+        Swin.setMenu(altmenu)
+        Swin.loadURL('http://localhost:6694/about')
+        Swin.focus()
+    }
 }
 
 app.on('before-quit', function () {
@@ -49,6 +80,14 @@ const altmenu = Menu.buildFromTemplate([
         type: 'normal',
         click: (): unknown => {
             return win.webContents.reload()
+        }
+    },
+    {
+        label: 'Settings',
+        type: 'normal',
+
+        click: (): unknown => {
+            return createSettings()
         }
     },
     {

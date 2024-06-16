@@ -1,6 +1,6 @@
 {
     "name": "anilagann",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A simple app for watching anime with Russian dubbing",
     "main": "./out/app.js",
     "author": "Alukkart",
@@ -22,7 +22,6 @@
         "@cliqz/adblocker-electron": "^1.26.15",
         "@electron-toolkit/preload": "^3.0.0",
         "@electron-toolkit/utils": "^3.0.0",
-        "@esbuild/win32-x64": "^0.20.2",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "debug": "~2.6.9",
@@ -31,6 +30,7 @@
         "electron-store": "^8.2.0",
         "electron-updater": "^6.1.7",
         "electron-vite": "^2.1.0",
+        "esbuild": "^0.21.5",
         "express": "^4.18.2",
         "express-rate-limit": "^6.7.1",
         "helmet": "^7.0.0",
